@@ -26,9 +26,36 @@
 // abri pagina, basicamente eh ta fz 1 chamada a api 3 bes por dia. 1 alguen ta reload pagina ta carega dados de api, e kes otus alguen
 // ta atxa dados td caregado, midjorando performance
 
-export async function getStaticProps(){
-  const response = await fetch('http://localhost:3333/episodes');
-  const data = await response.json();
+import { GetStaticProps } from 'next';
+import {api} from '../services/api';
+
+type Episode = {
+  id: string;
+  title: string;
+  menbers: string;
+}
+
+type HomeProps = {
+  episodes: Array<Episode>
+}
+
+
+export default function Home(props: HomeProps) {
+
+  return (
+    <p>{JSON.stringify(props.episodes)}</p>
+  )
+}
+
+export  const getStaticProps: GetStaticProps = async () => {
+  const {data} = await api.get('episodes',{
+    params: {
+      _limit:12,
+      _sort:'published_at',
+      _order:'desc'
+    }
+  });
+  
 
   return {
     props: {
@@ -37,12 +64,3 @@ export async function getStaticProps(){
     revalidate: 60 * 60 * 8,
   }
 }
-
-export default function Home(props) {
-
-  return (
-    <p>{JSON.stringify(props.episodes)}</p>
-  )
-}
-
-
