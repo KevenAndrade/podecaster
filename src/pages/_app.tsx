@@ -1,11 +1,11 @@
 import '../styles/global.scss';
-import {Header} from '../../components/Header';
-import {Player} from '../../components/Player';
-import styles from '../styles/app.module.scss';
+import {Header} from '../components/Header';
+import {Player} from '../components/Player';
+import style from '../styles/app.module.scss';
 
 function MyApp({ Component, pageProps }) {
   return (
-    <div className={styles.wrapper}>
+    <div className={style.wrapper}>
       <main>
         <Header />
         <Component {...pageProps} />
