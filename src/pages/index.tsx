@@ -64,13 +64,13 @@ export default function Home({ latestEpisodes, allEpisodes } : HomeProps) {
         {latestEpisodes.map(episode => {
           return (
             <li key={episode.id}>
-              <Image width={192} height={192} objectFit="cover" src={episode.thumbnail} alt={episode.title}/>
+              <Image width={128} height={128} objectFit="cover" src={episode.thumbnail} alt={episode.title}/>
               
               <div className={styles.epsisodeDetail}>
                 <a href="">{episode.title}</a>
                 <p>{episode.members}</p>
                 <span>{episode.publishedAt}</span>
-                <span>episode.durationAsString</span>
+                <span>{episode.durationAsString}</span>
               </div>
 
               <button type="button"> 
@@ -87,7 +87,7 @@ export default function Home({ latestEpisodes, allEpisodes } : HomeProps) {
       <h2>Todos Episodios</h2>
 
       </section>
-      <p>{JSON.stringify(latestEpisodes)}</p>
+      
     </div>
   )
 }
