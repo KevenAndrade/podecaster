@@ -35,13 +35,18 @@ import { convertDurationToTimeString } from '../utilis/convertDurationToTimeStri
 type Episode = {
   id: string;
   title: string;
-  menbers: string;
+  thumbnail: string;
+  description: string;
+  duration: number;
+  durationAsString: string;
+  url: string;
+  members: string;
+  publishedAt: string;
 }
 
 type HomeProps = {
   episodes: Array<Episode>
 }
-
 
 export default function Home(props: HomeProps) {
 
