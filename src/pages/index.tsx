@@ -101,7 +101,7 @@ export default function Home({ latestEpisodes, allEpisodes } : HomeProps) {
                 <tr key={episode.id}>
                   <td> <Image width={120} height={120} objectFit="cover" src={episode.thumbnail} alt={episode.title}/> </td>
                   <td> <a href="">{episode.title}</a> </td>
-                  <td> {episode.members} </td>
+                  <td style={{ width:100 }}> {episode.members} </td>
                   <td> {episode.publishedAt} </td>
                   <td> {episode.durationAsString} </td>
                   <td> 
