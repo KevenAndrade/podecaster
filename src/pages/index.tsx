@@ -99,10 +99,10 @@ export default function Home({ latestEpisodes, allEpisodes } : HomeProps) {
             {allEpisodes.map(episode =>{
               return (
                 <tr key={episode.id}>
-                  <td> <Image width={120} height={120} objectFit="cover" src={episode.thumbnail} alt={episode.title}/> </td>
+                  <td style={{ width:100 }}> <Image width={120} height={120} objectFit="cover" src={episode.thumbnail} alt={episode.title}/> </td>
                   <td> <a href="">{episode.title}</a> </td>
-                  <td style={{ width:100 }}> {episode.members} </td>
-                  <td> {episode.publishedAt} </td>
+                  <td> {episode.members} </td>
+                  <td style={{ width:100 }}> {episode.publishedAt} </td>
                   <td> {episode.durationAsString} </td>
                   <td> 
                     <button type="button">
