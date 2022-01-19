@@ -29,6 +29,10 @@ type EpisodeProps = {
 export default function Episode({episode} : EpisodeProps ) {
     const router = useRouter();
 
+    if(router.isFallback){
+        return <p> Carregando ... </p>
+    }
+
     return (
         <div className={styles.episodeContainer}>
             <div className={styles.episode}>
@@ -57,15 +61,49 @@ export default function Episode({episode} : EpisodeProps ) {
                 />
             </div>
         </div>
-        
     )
 }
 
 export const getStaticPaths: GetStaticPaths =  async () => {
+    // buscar  2 ultimos episodios e poi na paths, como provavelmente es eh kes mas acessado,
+    // ncreh tenes td criado estaticamente e pontu pa users
+
+    // Ta pega na dados de kes 2 paginas
+    const {data} = await api.get('episodes',{
+        params: {
+            _limit:2,
+            _sort:'published_at',
+            _order:'desc'
+        }
+    });
+
+    // como caminho de kes pagias eh ses id, nta pega na id pam associa a nha slug ki tem nome "momeEp"
+    const pathsEp = data.map(episodes =>{
+        return {
+            params: {
+                nomeEp: episodes.id
+            }
+        }
+    })
+
     return {
-        paths: [],
+        paths: pathsEp,
         fallback: 'blocking'
     }
+
+    // PATHS eh caminho de kes paginas ki creh pe gera na build, ou seja logo na executa eh ta criadu
+    // pa pode fica mas rapido, e kes pag eh td estatico.
+
+    // FALLBACK tem 3 opson :
+    // False -> hr k scodju false, eh ta gera apenas kes paginas estaticos kin define na PATHS, se nca define nada, eh ca ta gera nenhum pagina.
+
+    // True -> Eh ta gera td paginas na momento ku user clica na kel link de kel pagina, 
+        //execuson ta ser na lado cliente na browser, pagina ser caregadu na momento.
+
+    // Blocking -> Eh ta gera td paginas na camada NEXT. Se ndefine paginas na PATHS eh ta cria kes paginas la estaticamente na build.
+        // hora k user bai acessa kes paginas la ta atxal td criado e kes otus paginas ta ser criado na momento que acessado.
+        // eh recomendado pa kestoes de SO e pa crawlers pode leh pag,
+    
 }
 
 export  const getStaticProps: GetStaticProps = async (ctx) => {
