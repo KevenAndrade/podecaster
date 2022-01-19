@@ -45,6 +45,21 @@
     justify-content: center;
 }
 
+.currentEpisode{
+    text-align: center;
+
+    img {
+        border-radius: 1.5rem;
+    }
+
+    span {
+        display: block;
+        margin-top: 1rem;
+        opacity: 0.6;
+        line-height: 1.5rem;
+    }
+}
+
 .progressbar {
     display: flex;
     align-items: center;
