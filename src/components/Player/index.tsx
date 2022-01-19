@@ -34,7 +34,16 @@ export function Player(){
                 <div className={styles.progressbar}>
                     <span>00:00</span>
                     <div className={styles.slider}>
-                        <div className={styles.emptySlider}/>
+                        { episode ? (
+                            <Slider 
+                                trackStyle={{ backgroundColor: '#04d361'}}
+                                railStyle={{ backgroundColor: '#9f75ff'}}
+                                handleStyle={{ borderColor: '#04d361', borderWidth: 4}}
+                            />
+                        ) : (
+                            <div className={styles.emptySlider}/>
+                        )}
+                        
                     </div>
                     <span>00:00</span>
                 </div>
