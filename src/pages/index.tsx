@@ -57,7 +57,9 @@ type HomeProps = {
 }
 
 export default function Home({ latestEpisodes, allEpisodes } : HomeProps) {
-  const { play } = useContext(playerContext);
+  const { playList } = useContext(playerContext);
+
+  const episodelist = [...latestEpisodes, ...allEpisodes];
 
   return (
     <div className={styles.homePage}>
@@ -65,7 +67,7 @@ export default function Home({ latestEpisodes, allEpisodes } : HomeProps) {
       <h2>Ultimos Episodios </h2>
 
       <ul>
-        {latestEpisodes.map(episode => {
+        {latestEpisodes.map((episode, index) => {
           return (
             <li key={episode.id}>
               <Image width={128} height={128} objectFit="cover" src={episode.thumbnail} alt={episode.title}/>
@@ -79,7 +81,7 @@ export default function Home({ latestEpisodes, allEpisodes } : HomeProps) {
                 <span>{episode.durationAsString}</span>
               </div>
 
-              <button type="button" onClick={() =>play(episode)}> 
+              <button type="button" onClick={() =>playList(episodelist, index)}> 
                 <img src="/play-green.svg" alt="play"/>
               </button>
             </li>
@@ -104,7 +106,7 @@ export default function Home({ latestEpisodes, allEpisodes } : HomeProps) {
             </tr>
           </thead>
           <tbody>
-            {allEpisodes.map(episode =>{
+            {allEpisodes.map((episode, index) =>{
               return (
                 <tr key={episode.id}>
                   <td style={{ width:100 }}> <Image width={120} height={120} objectFit="cover" src={episode.thumbnail} alt={episode.title}/> </td>
@@ -117,7 +119,7 @@ export default function Home({ latestEpisodes, allEpisodes } : HomeProps) {
                   <td style={{ width:100 }}> {episode.publishedAt} </td>
                   <td> {episode.durationAsString} </td>
                   <td> 
-                    <button type="button" onClick={() =>play(episode)}>
+                    <button type="button" onClick={() =>playList(episodelist, index + 2)}>
                       <img src="/play-green.svg" alt="play"/>  
                     </button>
                   </td>
