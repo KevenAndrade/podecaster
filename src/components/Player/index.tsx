@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useRef, useEffect } from 'react';
 import Image from 'next/Image';
 
 import Slider from 'rc-slider';
@@ -7,9 +7,22 @@ import { playerContext } from '../../context/playerContext';
 import styles from './styles.module.scss';
 
 export function Player(){
-    const { episodeList, currentEpisodeIndex } = useContext(playerContext);
-
+    const { episodeList, currentEpisodeIndex, isPlaying, togglePlay } = useContext(playerContext);
+    const audioRef = useRef<HTMLAudioElement>(null);
     const episode = episodeList[currentEpisodeIndex];
+
+    useEffect(()=>{
+        if(!audioRef.current){
+            return;
+        }
+
+        if (isPlaying) {
+            audioRef.current.play();
+        }else{
+            audioRef.current.pause();
+        }      
+
+    }, [isPlaying])
 
     return (
         <div className={styles.playerContainer}>
@@ -49,7 +62,11 @@ export function Player(){
                 </div>
                 
                 { episode && (
-                    <audio src={episode.url} autoPlay/>
+                    <audio 
+                        src={episode.url} 
+                        ref={audioRef}
+                        autoPlay
+                    />
                 )}
 
                 <div className={styles.buttons}>
@@ -59,8 +76,12 @@ export function Player(){
                     <button type="button" disabled={!episode}>
                         <img src="/play-previous.svg" alt="previous"/>
                     </button>
-                    <button type="button" className={styles.PlayButton} disabled={!episode}>
-                        <img src="/play.svg" alt="play"/>
+                    <button type="button" className={styles.PlayButton} disabled={!episode} onClick={() =>togglePlay()}>
+                        {isPlaying ? (
+                            <img src="/pause.svg" alt="play"/>
+                        ) : (
+                            <img src="/play.svg"  alt="play"/>
+                        )}
                     </button>
                     <button type="button" disabled={!episode}>
                         <img src="/play-next.svg" alt="next"/>
