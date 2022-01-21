@@ -128,9 +128,7 @@ export default function Home({ latestEpisodes, allEpisodes } : HomeProps) {
             })}
           </tbody>
         </table>
-
       </section>
-      
     </div>
   )
 }
