@@ -7,7 +7,7 @@ import { playerContext } from '../../context/playerContext';
 import styles from './styles.module.scss';
 
 export function Player(){
-    const { episodeList, currentEpisodeIndex, isPlaying, togglePlay, setPlayingState,  playNext, playPreviows, hasNext, hasPrevious } = useContext(playerContext);
+    const { episodeList, currentEpisodeIndex, isPlaying, togglePlay, setPlayingState,  playNext, playPreviows, hasNext, hasPrevious, toggleLoop, isLoop } = useContext(playerContext);
     const audioRef = useRef<HTMLAudioElement>(null);
     const episode = episodeList[currentEpisodeIndex];
 
@@ -64,6 +64,7 @@ export function Player(){
                         src={episode.url} 
                         ref={audioRef}
                         autoPlay
+                        loop= {isLoop}
                         onPlay={() => setPlayingState(true)}
                         onPause={() => setPlayingState(false)}
                     />
@@ -86,7 +87,7 @@ export function Player(){
                     <button type="button" disabled={!episode || !hasNext} onClick={() =>playNext()}>
                         <img src="/play-next.svg" alt="next"/>
                     </button>
-                    <button type="button" disabled={!episode}>
+                    <button type="button" disabled={!episode} onClick={() =>toggleLoop()} className={isLoop ? styles.isActive : ''}>
                         <img src="/repeat.svg" alt="play"/>
                     </button>
                 </div>
