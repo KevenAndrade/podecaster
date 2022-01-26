@@ -7,7 +7,11 @@ import { playerContext } from '../../context/playerContext';
 import styles from './styles.module.scss';
 
 export function Player(){
-    const { episodeList, currentEpisodeIndex, isPlaying, togglePlay, setPlayingState,  playNext, playPreviows, hasNext, hasPrevious, toggleLoop, isLoop } = useContext(playerContext);
+    const { episodeList, currentEpisodeIndex, isPlaying, togglePlay, 
+            setPlayingState,  playNext, playPreviows, hasNext, 
+            hasPrevious, toggleLoop, isLoop, isShuffle, toggleShuffle
+        } = useContext(playerContext);
+
     const audioRef = useRef<HTMLAudioElement>(null);
     const episode = episodeList[currentEpisodeIndex];
 
@@ -71,7 +75,7 @@ export function Player(){
                 )}
 
                 <div className={styles.buttons}>
-                    <button type="button" disabled={!episode}>
+                    <button type="button" disabled={!episode || episodeList.length === 1} onClick={() =>toggleShuffle()} className={isShuffle ? styles.isActive : ''}>
                         <img src="/shuffle.svg" alt="Random"/>
                     </button>
                     <button type="button" disabled={!episode || !hasPrevious} onClick={() =>playPreviows()}>

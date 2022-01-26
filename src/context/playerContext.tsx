@@ -69,7 +69,10 @@ export function PlayerContextProvider( { children }) {
     }
 
     function playNext(){
-        if(hasNext){
+        if(isShuffle){
+            const nextRandomIndex = Math.floor(Math.random() * episodeList.length);
+            setCurrentEpisodeIndex(nextRandomIndex);
+        } else if(hasNext){
             setCurrentEpisodeIndex(currentEpisodeIndex + 1);
         }
     }
