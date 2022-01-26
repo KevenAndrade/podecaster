@@ -4,8 +4,9 @@ import { useRouter } from 'next/router';
 import { api } from '../../services/api';
 import  Link  from 'next/Link';
 import Image from 'next/image';
+import { useContext } from 'react';
 
-
+import { playerContext } from '../../context/playerContext';
 import { GetStaticPaths, GetStaticProps } from 'next/types';
 import { convertDurationToTimeString } from '../../utilis/convertDurationToTimeString';
 
@@ -28,6 +29,7 @@ type EpisodeProps = {
 
 export default function Episode({episode} : EpisodeProps ) {
     const router = useRouter();
+    const { play } = useContext(playerContext);
 
     if(router.isFallback){
         return <p> Carregando ... </p>
@@ -43,7 +45,7 @@ export default function Episode({episode} : EpisodeProps ) {
                         </button>
                     </Link>
                     <Image width={700} height={160} src={episode.thumbnail} objectFit="cover" />
-                    <button type="button">
+                    <button type="button" onClick={() => play(episode)}>
                         <img src="/play.svg" alt="Tocar"/>
                     </button>
                 </div>
