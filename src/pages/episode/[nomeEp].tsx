@@ -5,6 +5,7 @@ import { api } from '../../services/api';
 import  Link  from 'next/Link';
 import Image from 'next/image';
 import { useContext } from 'react';
+import Head from 'next/Head';
 
 import { playerContext } from '../../context/playerContext';
 import { GetStaticPaths, GetStaticProps } from 'next/types';
@@ -37,6 +38,10 @@ export default function Episode({episode} : EpisodeProps ) {
 
     return (
         <div className={styles.episodeContainer}>
+            <Head>
+                <title>{episode.title}</title>
+            </Head>
+
             <div className={styles.episode}>
                 <div className={styles.thumbnailContainer}>
                     <Link href="/">

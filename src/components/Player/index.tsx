@@ -1,6 +1,6 @@
 import { useContext, useRef, useEffect, useState } from 'react';
 import Image from 'next/Image';
-
+import Head from 'next/Head';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import { playerContext } from '../../context/playerContext';
@@ -51,6 +51,10 @@ export function Player(){
 
     return (
         <div className={styles.playerContainer}>
+            <Head>
+                <title> Home | Podcaster</title>
+            </Head>
+
             <header>
                 <img src="/playing.svg" alt="Tocando"/>
                 <strong>Tocando agora </strong>
