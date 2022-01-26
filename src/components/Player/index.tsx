@@ -10,7 +10,7 @@ import { convertDurationToTimeString } from '../../utilis/convertDurationToTimeS
 export function Player(){
     const { episodeList, currentEpisodeIndex, isPlaying, togglePlay, 
             setPlayingState,  playNext, playPreviows, hasNext, 
-            hasPrevious, toggleLoop, isLoop, isShuffle, toggleShuffle
+            hasPrevious, toggleLoop, isLoop, isShuffle, toggleShuffle, clearPlayer
         } = useContext(playerContext);
 
     const audioRef = useRef<HTMLAudioElement>(null);
@@ -34,6 +34,19 @@ export function Player(){
         audioRef.current.addEventListener('timeupdate', () =>{
             setProgress(Math.floor(audioRef.current.currentTime));
         })
+    }
+
+    function handleChange(amount: number){
+        audioRef.current.currentTime = amount;
+        setProgress(amount);
+    }
+
+    function handleEnd(){
+        if(hasNext){
+            playNext();
+        }else {
+            clearPlayer();
+        }
     }
 
     return (
@@ -63,6 +76,7 @@ export function Player(){
                             <Slider 
                                 max ={episode.duration}
                                 value = {progress}
+                                onChange = {handleChange}
                                 trackStyle={{ backgroundColor: '#04d361'}}
                                 railStyle={{ backgroundColor: '#9f75ff'}}
                                 handleStyle={{ borderColor: '#04d361', borderWidth: 4}}
@@ -84,6 +98,7 @@ export function Player(){
                         loop= {isLoop}
                         onPlay={() => setPlayingState(true)}
                         onPause={() => setPlayingState(false)}
+                        onEnded ={handleEnd}
                     />
                 )}
                 {/* controles */}
