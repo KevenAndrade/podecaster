@@ -16,7 +16,9 @@
 
 <h2 align="center">Preview 📱</h2>
 
-   > * 
+   > * <img src="https://github.com/KevenAndrade/podecaster/blob/main/screens/Screenshot%202022-01-21%20134737.png?raw=true" width="100%" alt="Logo dev.quiz_"/>
+   > * <img src="https://github.com/KevenAndrade/podecaster/blob/main/screens/Screenshot%202022-01-21%20134926.png?raw=true" width="100%" alt="Logo dev.quiz_"/>
+   > * <img src="https://github.com/KevenAndrade/podecaster/blob/main/screens/Screenshot%202022-01-21%20135009.png?raw=true" width="100%" alt="Logo dev.quiz_"/>
 
 ---
 
